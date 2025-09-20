@@ -4,34 +4,36 @@ layout (local_size_x = 1) in;
 layout (local_size_y = 1) in;
 
 // I/Os
-layout (std430, binding = 0) buffer PrevCellStates {   // An SSBO
-    uint State[];
+layout (std430, binding = 0) buffer Prev {   // An SSBO
+    uint PrevCellStates[];
 };
-layout (std430, binding = 1) buffer NewCellStates {   // An SSBO
-    uint State[];
+layout (std430, binding = 1) buffer New {   // An SSBO
+    uint NewCellStates[];
 };
 
 // uniforms
-uniform uvec2 numCellsXY;  
+uniform uint numCellsX;
+uniform uint numCellsY;
 
 
 void main() {
     uint x = gl_GlobalInvocationID.x;   // Current work group x position
     uint y = gl_GlobalInvocationID.y;
 
-    uint curState = PrevCellStates[y*numCellsXY[0] + x];
+    uint curState = PrevCellStates[y*numCellsX + x];
 
     // Compute sum of neighbour states
     uint neighbourStatesSum = 0;
     for (uint i = -1; i <= 1; i++) {
         for (uint j = -1; j <= 1; j++) {
-            if ((i = 0 && j == 0) || x+i < 0 || x+i >= numCellsXY[0] || y+j < 0 || y+j >= numCellsXY[1]) // Skip current cell and boundaries
+            if ((i == 0 && j == 0) || x+i < 0 || x+i >= numCellsX || y+j < 0 || y+j >= numCellsY) // Skip current cell and boundaries
                 continue;
-            neighbourStatesSum += PrevCellStates[(y+j)*numCellsXY[0] + (x+i)];
+            neighbourStatesSum += PrevCellStates[(y+j)*numCellsX + (x+i)];
+        }
     }
 
-    if (neighbourStatesSum == 3 || neighbourStatesSum + curState)
-        NewCellStates[y*numCellsXY[0] + x] = 1;
+    if (neighbourStatesSum == 3 || neighbourStatesSum + curState == 3)
+        NewCellStates[y*numCellsX + x] = 1;
     else
-        NewCellStates[y*numCellsXY[0] + x] = 0;
+        NewCellStates[y*numCellsX + x] = 0;
 }
