@@ -7,13 +7,16 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "vf_shader_program.h"
+#include "compute_shader_program.h"
 
 using namespace glm;
 
 
 // SETTINGS
 // --------
-int SCR_WIDTH = 800, SCR_HEIGHT = 600; 
+int SCR_WIDTH = 800, SCR_HEIGHT = 800; 
+const uint NUMCELLS_X = 10, NUMCELLS_Y = 10;
 
 
 // FUNCTIONS
@@ -31,6 +34,10 @@ void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 // GLOBALS
 // -------
+GLuint prevCellsBuf, newCellsBuf;
+GLuint VAO; // Vertex attr. obj
+VFShaderProgram* mainShader;
+ComputeShaderProgram* computeShader;
 
 int main()
 {
@@ -48,6 +55,12 @@ int main()
     }
 
     glEnable(GL_DEPTH_TEST);
+    
+    mainShader = new VFShaderProgram("src//shaders//vertexShader.vert", "src//shaders//fragmentShader.frag");
+    computeShader = new ComputeShaderProgram("src//shaders//computeShader.comp");
+
+    computeShader->setInt_w_Name("numCellsX", NUMCELLS_X);
+    computeShader->setInt_w_Name("numCellsY", NUMCELLS_Y);
 
     // RENDER LOOP
     // -----------
@@ -62,6 +75,8 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
 
+        renderCells();
+
         // GLFW: POLL & CALL IOEVENTS + SWAP BUFFERS
         // -----------------------------------------
         glfwSwapBuffers(window);    // For reader - search 'double buffer'
@@ -71,6 +86,54 @@ int main()
     // GLFW: TERMINATE GLFW, CLEARING ALL PREVIOUSLY ALLOCATED GLFW RESOURCES
     glfwTerminate();
     return 0;
+}
+
+void renderCells()
+{
+    mainShader->use();
+    glBindVertexArray(VAO);
+    // glDrawArrays(GL_POINTS, 0, );
+}
+
+void initSSBOS()
+{
+    // Init data
+    // ---------
+    std::vector<uint32> prevCells(NUMCELLS_X, NUMCELLS_Y);  // Prev cell states
+    std::vector<uint32> newCells(NUMCELLS_X, NUMCELLS_Y);   // Current cell states
+    // temp
+    for (int i = 0; i < NUMCELLS_X; i++)
+        for (int j = 0; j < NUMCELLS_Y; j++) {
+            prevCells[i, j] = 0;
+            newCells[i, j] = 0;
+        }
+
+    // Create buffers and bind to GL objects
+    // -------------------------------------
+    glGenBuffers(1, &prevCellsBuf);
+    glGenBuffers(1, &newCellsBuf);
+    
+    GLuint bufferSize = (int)prevCells.size() * sizeof(prevCells[0]);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, prevCellsBuf);   // Binds the buffer to an SSBO at binding index = 0 in the compute shader
+    glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, prevCells.data(), GL_DYNAMIC_DRAW);  // Send buffer data to SSBO target
+
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, newCellsBuf);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, newCells.data(), GL_DYNAMIC_DRAW);
+
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, newCellsBuf);   // Same buffer is bound as an SSBO and as 'GL_ARRAY_BUFFER' in normal vertex shader pipeline
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+
+    glBindVertexArray(0);   // Unbind VAO
+}
+
+void executeCompShader()
+{
+    computeShader->use();
+    glDispatchCompute(NUMCELLS_X*NUMCELLS_Y, NUMCELLS_X, NUMCELLS_Y);
 }
 
 
