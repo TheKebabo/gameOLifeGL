@@ -8,6 +8,10 @@ class VFShaderProgram : public ShaderProgram
 {
 public: 
     VFShaderProgram(const char* vertexPath, const char* fragmentPath);
+protected:
+    const char* _vertexPath;
+    const char* _fragmentPath;
+    void checkLinkErrors();
 };
   
 #endif

@@ -33,7 +33,7 @@ public:
 protected:
     unsigned readAndCompileShaderFile(const char* shaderPath, unsigned& shaderID, std::string shaderType);
     void checkCompileErrors(unsigned& shaderID, std::string shaderType);
-    void checkLinkErrors();
+    virtual void checkLinkErrors();
 };
 
 #endif

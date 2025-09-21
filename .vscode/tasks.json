@@ -6,6 +6,7 @@
             "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
+                "-g",
                 "main.cpp",
                 "-I${workspaceFolder}\\include",
                 "-lopengl32",
@@ -16,7 +17,8 @@
                 "${workspaceFolder}\\src\\compute_shader_program.cpp",
                 "C:\\msys64\\mingw64\\include\\GLAD\\glad.c",
                 "C:\\msys64\\mingw64\\include\\GLFW\\glfw3.h",
-                "-o", "${workspaceFolder}\\main.exe",
+                "-o",
+                "${workspaceFolder}\\main.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
