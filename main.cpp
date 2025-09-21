@@ -55,7 +55,8 @@ public:
 } liveCells;
 
 ComputeShaderProgram* computeShader;
-std::vector<uint32> newCells(NUMCELLS_X, NUMCELLS_Y);   // Current cell states
+std::vector<uint32> newCells(NUMCELLS_X * NUMCELLS_Y);   // Current cell states
+int newLiveCellsCount = 0;
 
 int main()
 {
@@ -74,9 +75,9 @@ int main()
 
     glEnable(GL_DEPTH_TEST);
 
-    // initCellsComputeShader();
+    initCellsComputeShader();
     initGridShader();
-    // initLiveCellsShader();
+    initLiveCellsShader();
 
     // RENDER LOOP
     // -----------
@@ -93,7 +94,7 @@ int main()
 
         renderGrid();
         // bindNewLiveCellVertices();
-        // renderLiveCells();
+        renderLiveCells();
 
         // GLFW: POLL & CALL IOEVENTS + SWAP BUFFERS
         // -----------------------------------------
@@ -118,7 +119,8 @@ void renderGrid()
 void renderLiveCells()
 {
     liveCells.Shader->use();
-    // Render 2 coloured triangles for each live cell
+    glBindVertexArray(liveCells.VAO);
+    glDrawElements(GL_TRIANGLES, newLiveCellsCount * 6, GL_UNSIGNED_INT, 0);
 }
 
 // This shader computes the core logic of the cellular automata (not used for drawing)
@@ -156,13 +158,7 @@ void initCellsComputeShader()
 // This shader draws an unchanging base grid with lines
 void initGridShader()
 {
-    grid.Shader = new VFShaderProgram("src//shaders//gridVert.vert", "src//shaders//gridFrag.frag");
-
-    glm::mat4 identity = glm::mat4(1.0f);
-    glm::mat4 transl = glm::inverse(glm::translate(identity, glm::vec3(1.0f, 1.0f, 0.0f)));   // Translates NDC bottom-left (-1, -1) -> (0, 0)
-    glm::mat4 scale = glm::inverse(glm::scale(identity, glm::vec3(SCR_WIDTH, SCR_HEIGHT, 1.0f)));    // Scales top-right (after translation) (2, 2) -> (SCR_W, SCR_H)
-    grid.Shader->setMat4_w_Name("transl", GL_FALSE, value_ptr(transl));
-    grid.Shader->setMat4_w_Name("scale", GL_FALSE, value_ptr(scale));
+    grid.Shader = new VFShaderProgram("src//shaders//vert.vert", "src//shaders//frag.frag");
 
     // Create & bind buffers
     // ---------------------
@@ -174,21 +170,21 @@ void initGridShader()
     
     int i = 0;
     // Vertical lines
-    GLfloat scr2NDCScaleX = 2.0f / static_cast<GLfloat>(NUMCELLS_X);
-    for (GLfloat xPos = -1.0f; xPos <= 1.0f; xPos += scr2NDCScaleX) {
+    GLfloat xIncr = 2.0f / static_cast<GLfloat>(NUMCELLS_X);
+    for (GLfloat xPos = -1.0f; xPos <= 1.0f; xPos += xIncr) {
         gridVertices[i++]   = xPos;    gridVertices[i++] = -1.0f;
         gridVertices[i++]   = xPos;    gridVertices[i++] = 1.0f;
     }
     // // Horizontal lines
-    GLfloat scr2NDCScaleY = 2.0f / static_cast<GLfloat>(NUMCELLS_Y);
-    for (GLfloat yPos = -1.0f; yPos <= 1.0f; yPos += scr2NDCScaleY) {
+    GLfloat yIncr = 2.0f / static_cast<GLfloat>(NUMCELLS_Y);
+    for (GLfloat yPos = -1.0f; yPos <= 1.0f; yPos += yIncr) {
         gridVertices[i++]   = -1.0f;       gridVertices[i++] = yPos;
         gridVertices[i++]   = 1.0f;    gridVertices[i++] = yPos;
     }
-    
+
     glGenBuffers(1, &grid.VBO);
     glBindBuffer(GL_ARRAY_BUFFER, grid.VBO);  // Binds newly created object to the correct buffer type, which when updated/configured will update 'VBO' (as seen below)
-    glBufferData(GL_ARRAY_BUFFER, size(gridVertices) * sizeof(GLfloat), gridVertices.data(), GL_STATIC_DRAW);  // Copies vertex data into the buffer
+    glBufferData(GL_ARRAY_BUFFER, gridVertices.size() * sizeof(GLfloat), gridVertices.data(), GL_STATIC_DRAW);  // Copies vertex data into the buffer
 
     // CONFIG VAO
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*)0);   // Describes to OpenGL how to interpet vertex POSITION data
@@ -201,18 +197,17 @@ void initGridShader()
 // This shader draws coloured squares upon only the live cells
 void initLiveCellsShader()
 {
-    liveCells.Shader = new VFShaderProgram("src//shaders//liveCellsVert.vert", "src//shaders//liveCellsFrag.frag");
+    liveCells.Shader = new VFShaderProgram("src//shaders//vert.vert", "src//shaders//frag.frag");
 
     // Create & bind buffers
     // ---------------------
     glGenVertexArrays(1, &liveCells.VAO); // // Generates the object and stores the resulting id in passed in integer
-    glBindVertexArray(liveCells.VAO); // Binds 'VAO' as current active vertex array object
 
     // INIT, BIND & SET VBO, EBO
     bindNewLiveCellVertices();
 
     // Config VAO
-    glVertexAttribPointer(0, 2, GL_INT, GL_FALSE, 2 * sizeof(GLint), (void*)0);   // Describes to OpenGL how to interpet vertex POSITION data
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*)0);   // Describes to OpenGL how to interpet vertex POSITION data
     glEnableVertexAttribArray(0);   /// Enables vertex attribute at location = 0, since they are disabled by default
 
     // UNBIND VBO FROM CURRENT ACTIVE BUFFER
@@ -221,49 +216,59 @@ void initLiveCellsShader()
 
 void bindNewLiveCellVertices()
 {
-    std::vector<GLint> liveCellVertices; // 4 points (of 2 ints) = 8 ints for each live cell
+    std::vector<GLfloat> liveCellVertices; // 4 points (of 2 values) = 8 values for each live cell
 
+    GLfloat scaleX = 2.0f / static_cast<GLfloat>(NUMCELLS_X);
+    GLfloat scaleY = 2.0f / static_cast<GLfloat>(NUMCELLS_Y);
+
+    newLiveCellsCount = 0;
     for (GLint y = 0; y < NUMCELLS_Y; ++y) {
         for (GLint x = 0; x < NUMCELLS_X; ++x) {
             if (newCells[y*NUMCELLS_X + x] == 0) continue;  // Dead cell
 
-            liveCellVertices.push_back(x * (GLint)CELL_WIDTH);     // BOTTOM-LEFT
-            liveCellVertices.push_back(y * (GLint)CELL_WIDTH);
+            newLiveCellsCount++;
 
-            liveCellVertices.push_back((x+1) * (GLint)CELL_WIDTH); // BOTTOM-RIGHT
-            liveCellVertices.push_back(y * (GLint)CELL_WIDTH);
+            GLfloat xF = static_cast<GLfloat>(x);   GLfloat yF = static_cast<GLfloat>(y);
 
-            liveCellVertices.push_back((x+1) * (GLint)CELL_WIDTH); // TOP-RIGHT
-            liveCellVertices.push_back((y+1) * (GLint)CELL_WIDTH);
+            liveCellVertices.push_back(xF * scaleX - 1.0f);     // BOTTOM-LEFT
+            liveCellVertices.push_back(yF * scaleY - 1.0f);
 
-            liveCellVertices.push_back(x * (GLint)CELL_WIDTH);     // TOP-LEFT
-            liveCellVertices.push_back((y+1) * (GLint)CELL_WIDTH);
+            liveCellVertices.push_back((xF+1.0f) * scaleX -1.0f); // BOTTOM-RIGHT
+            liveCellVertices.push_back(yF * scaleY - 1.0f);
+
+            liveCellVertices.push_back((xF+1.0f) * scaleX -1.0f); // TOP-RIGHT
+            liveCellVertices.push_back((yF+1.0f) * scaleY -1.0f);
+
+            liveCellVertices.push_back(xF * scaleX - 1.0f);     // TOP-LEFT
+            liveCellVertices.push_back((yF+1) * scaleY - 1.0f);
         }
     }
 
     std::vector<GLint> liveCellIndeces; // 2 triangles of 3 indices = 6 ints for each live cell
 
-    for (GLint vertex = 0; vertex < liveCellVertices.size(); vertex += 2) {
+    for (GLint vertex = 0; vertex < liveCellVertices.size() / 2; vertex += 4) {
         // First triangle
         liveCellIndeces.push_back(vertex);
         liveCellIndeces.push_back(vertex+1);
         liveCellIndeces.push_back(vertex+2);
 
         // Second triangle
-        liveCellIndeces.push_back(vertex+1);
         liveCellIndeces.push_back(vertex+2);
         liveCellIndeces.push_back(vertex+3);
+        liveCellIndeces.push_back(vertex);
     }
+
+    glBindVertexArray(liveCells.VAO); // Binds 'VAO' as current active vertex array object
 
     // VBO (vertex data)
     glGenBuffers(1, &liveCells.VBO);
     glBindBuffer(GL_ARRAY_BUFFER, liveCells.VBO);  // Binds newly created object to the correct buffer type, which when updated/configured will update 'VBO' (as seen below)
-    glBufferData(GL_ARRAY_BUFFER, size(liveCellVertices) * sizeof(GLint), liveCellVertices.data(), GL_DYNAMIC_DRAW);  // Copies vertex data into the buffer
+    glBufferData(GL_ARRAY_BUFFER, liveCellVertices.size() * sizeof(GLfloat), liveCellVertices.data(), GL_DYNAMIC_DRAW);  // Copies vertex data into the buffer
     
     // EBO (index data)
     glGenBuffers(1, &liveCells.EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, liveCells.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size(liveCellIndeces) * sizeof(GLint), liveCellIndeces.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, liveCellIndeces.size() * sizeof(GLint), liveCellIndeces.data(), GL_STATIC_DRAW);
 }
 
 void executeCompShader()
