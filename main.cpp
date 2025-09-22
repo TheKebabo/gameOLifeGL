@@ -15,7 +15,7 @@ using namespace glm;
 
 // SETTINGS
 // --------
-const uint NUMCELLS_X = 5, NUMCELLS_Y = 5;
+const uint NUMCELLS_X = 50, NUMCELLS_Y = 50;
 int SCR_WIDTH = 600, SCR_HEIGHT = 600;
 int CELL_WIDTH = SCR_WIDTH / NUMCELLS_X, CELL_HEIGHT = SCR_HEIGHT / NUMCELLS_Y;
 
@@ -28,6 +28,8 @@ void initLiveCellsShader();
 void bindNewLiveCellVertices();
 void renderGrid();
 void renderLiveCells();
+void executeCompShader();
+void writeToSSBOs();
 
 // Utilities
 GLFWwindow* configGLFW();
@@ -55,6 +57,7 @@ public:
 } liveCells;
 
 ComputeShaderProgram* computeShader;
+std::vector<uint32> prevCells(NUMCELLS_X * NUMCELLS_Y);  // Prev cell states
 std::vector<uint32> newCells(NUMCELLS_X * NUMCELLS_Y);   // Current cell states
 int newLiveCellsCount = 0;
 
@@ -78,28 +81,46 @@ int main()
     initCellsComputeShader();
     initGridShader();
     initLiveCellsShader();
+    
+    float prevUpdateFrame = 0;
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
+    renderGrid();
+    renderLiveCells();
 
     // RENDER LOOP
     // -----------
     while(!glfwWindowShouldClose(window))
     {
+        float currentFrame = glfwGetTime();
+
         // INPUT
         // -----
         processInput(window);
 
         // RENDER
         // ------        
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
 
-        renderGrid();
-        // bindNewLiveCellVertices();
-        renderLiveCells();
+        if (currentFrame - prevUpdateFrame > 0.5f) {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
 
-        // GLFW: POLL & CALL IOEVENTS + SWAP BUFFERS
-        // -----------------------------------------
-        glfwSwapBuffers(window);    // For reader - search 'double buffer'
-        glfwPollEvents();
+            executeCompShader();
+
+            renderGrid();
+            bindNewLiveCellVertices();
+            renderLiveCells();
+
+            // GLFW: POLL & CALL IOEVENTS + SWAP BUFFERS
+            // -----------------------------------------
+            glfwSwapBuffers(window);    // For reader - search 'double buffer'
+            glfwPollEvents();
+            
+            prevUpdateFrame = currentFrame;
+        }
+
+
     }
 
     // GLFW: TERMINATE GLFW, CLEARING ALL PREVIOUSLY ALLOCATED GLFW RESOURCES
@@ -128,31 +149,37 @@ void initCellsComputeShader()
 {
     computeShader = new ComputeShaderProgram("src//shaders//computeShader.comp");
 
+    computeShader->use();
     computeShader->setInt_w_Name("numCellsX", NUMCELLS_X);
     computeShader->setInt_w_Name("numCellsY", NUMCELLS_Y);
 
     // Create & bind 'cell state' buffers
     // ----------------------------------
     // Init cell data
-    std::vector<uint32> prevCells(NUMCELLS_X, NUMCELLS_Y);  // Prev cell states
-    // temp
     for (int i = 0; i < NUMCELLS_X; i++)
         for (int j = 0; j < NUMCELLS_Y; j++) {
-            prevCells[i, j] = 0;
-            newCells[i, j] = 0;
+            int linInd = j * NUMCELLS_X + i;    // Convert 2D index to 1D
+            if (rand()%4 == 1) {
+                prevCells[linInd] = 1;
+                newCells[linInd] = 1;
+            }
+            else {
+                prevCells[linInd] = 0;
+                newCells[linInd] = 0;
+            }
+            // prevCells[linInd] = 1;
+            // newCells[linInd] = 1;
         }
 
     
     // Bind buffers to SSBOS
-    GLuint bufferSize = (int)prevCells.size() * sizeof(prevCells[0]);
-
     glGenBuffers(1, &prevCellsBuf);
-    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, prevCellsBuf);   // Binds the buffer to an SSBO at binding index = 0 in the compute shader
-    glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, prevCells.data(), GL_DYNAMIC_DRAW);  // Send buffer data to SSBO target
-
     glGenBuffers(1, &newCellsBuf);
+
+    writeToSSBOs();
+    
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, prevCellsBuf);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, newCellsBuf);
-    glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, newCells.data(), GL_DYNAMIC_DRAW);
 }
 
 // This shader draws an unchanging base grid with lines
@@ -273,8 +300,48 @@ void bindNewLiveCellVertices()
 
 void executeCompShader()
 {
+    writeToSSBOs();
+    
     computeShader->use();
-    glDispatchCompute(NUMCELLS_X*NUMCELLS_Y, NUMCELLS_X, NUMCELLS_Y);
+
+    glDispatchCompute(NUMCELLS_X, NUMCELLS_Y, 1);
+    glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT); // Wait for execution to complete so data isn't overwritten
+
+    // glBindBuffer(GL_SHADER_STORAGE_BUFFER, prevCellsBuf);
+    // uint32* temp = static_cast<uint32*>(glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, newCells.size() * sizeof(uint32), GL_MAP_READ_BIT));
+    // if (temp)
+    // {
+    //     std::vector<uint32> result(temp, temp + prevCells.size());
+    //     newCells = result;
+    // }
+    // glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
+
+    // Read from SSBOs
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, newCellsBuf);
+    // Map buffer for reading
+    uint32* ptr = static_cast<uint32*>(glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, newCells.size() * sizeof(uint32), GL_MAP_READ_BIT));
+    if (ptr)
+    {
+        std::vector<uint32> result(ptr, ptr + prevCells.size());
+        newCells = result;
+    }
+    glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
+
+    // Bind buffers to SSBOS
+    writeToSSBOs();
+
+    prevCells = newCells;
+}
+
+void writeToSSBOs()
+{
+    GLuint bufferSize = prevCells.size() * sizeof(prevCells[0]);
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, prevCellsBuf);   // Binds the buffer to an SSBO at binding index = 0 in the compute shader
+    glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, prevCells.data(), GL_DYNAMIC_DRAW);  // Send buffer data to SSBO target
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, newCellsBuf);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, newCells.data(), GL_DYNAMIC_COPY);
 }
 
 
