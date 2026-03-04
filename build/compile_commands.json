@@ -1,0 +1,122 @@
+[
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\main.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\main.cpp\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\main.cpp",
+  "output": "CMakeFiles\\gameOLifeGL.dir\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -o CMakeFiles\\gameOLifeGL.dir\\src\\glad.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\glad.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\glad.c",
+  "output": "CMakeFiles\\gameOLifeGL.dir\\src\\glad.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\shader_program.cpp\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\shader_program.cpp",
+  "output": "CMakeFiles\\gameOLifeGL.dir\\src\\shader_program.cpp.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\vf_shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\vf_shader_program.cpp\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\vf_shader_program.cpp",
+  "output": "CMakeFiles\\gameOLifeGL.dir\\src\\vf_shader_program.cpp.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\compute_shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\compute_shader_program.cpp\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\compute_shader_program.cpp",
+  "output": "CMakeFiles\\gameOLifeGL.dir\\src\\compute_shader_program.cpp.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\context.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\context.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\context.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\context.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\init.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\init.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\init.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\init.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\input.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\input.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\input.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\input.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\monitor.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\monitor.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\monitor.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\monitor.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\vulkan.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\vulkan.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\vulkan.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\vulkan.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\window.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\window.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\window.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\window.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_init.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_init.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_init.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_init.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_joystick.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_joystick.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_joystick.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_joystick.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_monitor.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_monitor.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_monitor.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_monitor.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_time.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_time.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_time.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_time.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_thread.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_thread.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_thread.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_thread.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_window.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_window.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\win32_window.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\win32_window.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\wgl_context.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\wgl_context.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\wgl_context.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\wgl_context.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\egl_context.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\egl_context.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\egl_context.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\egl_context.c.obj"
+},
+{
+  "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/src\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src\" -g -std=gnu99 -Wall -Wdeclaration-after-statement -o _deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\osmesa_context.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\osmesa_context.c\"",
+  "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\build\\_deps\\glfw-src\\src\\osmesa_context.c",
+  "output": "_deps\\glfw-build\\src\\CMakeFiles\\glfw.dir\\osmesa_context.c.obj"
+}
+]

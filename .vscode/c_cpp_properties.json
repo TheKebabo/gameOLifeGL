@@ -1,16 +1,5 @@
 {
     "configurations": [
-        // {
-        //     "name": "Linux",
-        //     "includePath": [
-        //         "${workspaceFolder}/include/**"
-        //     ],
-        //     "defines": [],
-        //     "cStandard": "c17",
-        //     "cppStandard": "c++11",
-        //     "compilerPath": "/usr/bin/gcc",
-        //     "intelliSenseMode": "linux-gcc-x64"
-        // },
         {
             "name": "Win64",
             "includePath": [
@@ -22,10 +11,11 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.22621.0",
-            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+            "compilerPath": "C:/Strawberry/c/bin/g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "windows-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

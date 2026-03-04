@@ -1,0 +1,9 @@
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/CMakeFiles/gameOLifeGL.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/CMakeFiles/edit_cache.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/CMakeFiles/edit_cache.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/CMakeFiles/rebuild_cache.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src/CMakeFiles/update_mappings.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src/CMakeFiles/glfw.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src/CMakeFiles/edit_cache.dir
+C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-build/src/CMakeFiles/rebuild_cache.dir

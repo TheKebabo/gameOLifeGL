@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <ctime>
 
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
@@ -15,8 +16,8 @@ using namespace glm;
 
 // SETTINGS
 // --------
-const uint NUMCELLS_X = 50, NUMCELLS_Y = 50;
-int SCR_WIDTH = 600, SCR_HEIGHT = 600;
+const uint NUMCELLS_X = 75, NUMCELLS_Y = 75;
+int SCR_WIDTH = 1000, SCR_HEIGHT = 1000;
 int CELL_WIDTH = SCR_WIDTH / NUMCELLS_X, CELL_HEIGHT = SCR_HEIGHT / NUMCELLS_Y;
 
 
@@ -63,6 +64,8 @@ int newLiveCellsCount = 0;
 
 int main()
 {
+    srand(static_cast<unsigned int>(time(NULL))); // Seed randomness
+
     // GLFW: INIT & CONFIG
     // -------------------
     GLFWwindow* window = configGLFW();
@@ -102,7 +105,7 @@ int main()
         // RENDER
         // ------        
 
-        if (currentFrame - prevUpdateFrame > 0.5f) {
+        if (currentFrame - prevUpdateFrame > 0.05f) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
 
@@ -147,7 +150,7 @@ void renderLiveCells()
 // This shader computes the core logic of the cellular automata (not used for drawing)
 void initCellsComputeShader()
 {
-    computeShader = new ComputeShaderProgram("src//shaders//computeShader.comp");
+    computeShader = new ComputeShaderProgram("shaders//computeShader.comp");
 
     computeShader->use();
     computeShader->setInt_w_Name("numCellsX", NUMCELLS_X);
@@ -156,10 +159,11 @@ void initCellsComputeShader()
     // Create & bind 'cell state' buffers
     // ----------------------------------
     // Init cell data
-    for (int i = 0; i < NUMCELLS_X; i++)
-        for (int j = 0; j < NUMCELLS_Y; j++) {
+    for (int j = 0; j < NUMCELLS_Y; j++) {
+        for (int i = 0; i < NUMCELLS_X; i++) {
             int linInd = j * NUMCELLS_X + i;    // Convert 2D index to 1D
-            if (rand()%4 == 1) {
+            // if (rand()%4 == 1) {
+            if (i >= NUMCELLS_X / 4 && i <= 3 * NUMCELLS_X / 4 && j >= NUMCELLS_Y / 4 && j <= 3 * NUMCELLS_Y / 4) {
                 prevCells[linInd] = 1;
                 newCells[linInd] = 1;
             }
@@ -170,6 +174,7 @@ void initCellsComputeShader()
             // prevCells[linInd] = 1;
             // newCells[linInd] = 1;
         }
+    }
 
     
     // Bind buffers to SSBOS
@@ -185,7 +190,7 @@ void initCellsComputeShader()
 // This shader draws an unchanging base grid with lines
 void initGridShader()
 {
-    grid.Shader = new VFShaderProgram("src//shaders//vert.vert", "src//shaders//frag.frag");
+    grid.Shader = new VFShaderProgram("shaders//vert.vert", "shaders//frag.frag");
 
     // Create & bind buffers
     // ---------------------
@@ -224,13 +229,15 @@ void initGridShader()
 // This shader draws coloured squares upon only the live cells
 void initLiveCellsShader()
 {
-    liveCells.Shader = new VFShaderProgram("src//shaders//vert.vert", "src//shaders//frag.frag");
+    liveCells.Shader = new VFShaderProgram("shaders//vert.vert", "shaders//frag.frag");
 
     // Create & bind buffers
     // ---------------------
     glGenVertexArrays(1, &liveCells.VAO); // // Generates the object and stores the resulting id in passed in integer
 
     // INIT, BIND & SET VBO, EBO
+    glGenBuffers(1, &liveCells.VBO);
+    glGenBuffers(1, &liveCells.EBO);
     bindNewLiveCellVertices();
 
     // Config VAO
@@ -271,40 +278,36 @@ void bindNewLiveCellVertices()
         }
     }
 
-    std::vector<GLint> liveCellIndeces; // 2 triangles of 3 indices = 6 ints for each live cell
+    std::vector<GLint> liveCellIndices; // 2 triangles of 3 indices = 6 ints for each live cell
 
     for (GLint vertex = 0; vertex < liveCellVertices.size() / 2; vertex += 4) {
         // First triangle
-        liveCellIndeces.push_back(vertex);
-        liveCellIndeces.push_back(vertex+1);
-        liveCellIndeces.push_back(vertex+2);
+        liveCellIndices.push_back(vertex);
+        liveCellIndices.push_back(vertex+1);
+        liveCellIndices.push_back(vertex+2);
 
         // Second triangle
-        liveCellIndeces.push_back(vertex+2);
-        liveCellIndeces.push_back(vertex+3);
-        liveCellIndeces.push_back(vertex);
+        liveCellIndices.push_back(vertex+2);
+        liveCellIndices.push_back(vertex+3);
+        liveCellIndices.push_back(vertex);
     }
 
     glBindVertexArray(liveCells.VAO); // Binds 'VAO' as current active vertex array object
 
     // VBO (vertex data)
-    glGenBuffers(1, &liveCells.VBO);
     glBindBuffer(GL_ARRAY_BUFFER, liveCells.VBO);  // Binds newly created object to the correct buffer type, which when updated/configured will update 'VBO' (as seen below)
     glBufferData(GL_ARRAY_BUFFER, liveCellVertices.size() * sizeof(GLfloat), liveCellVertices.data(), GL_DYNAMIC_DRAW);  // Copies vertex data into the buffer
     
     // EBO (index data)
-    glGenBuffers(1, &liveCells.EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, liveCells.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, liveCellIndeces.size() * sizeof(GLint), liveCellIndeces.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, liveCellIndices.size() * sizeof(GLint), liveCellIndices.data(), GL_STATIC_DRAW);
 }
 
 void executeCompShader()
-{
-    writeToSSBOs();
-    
+{    
     computeShader->use();
 
-    glDispatchCompute(NUMCELLS_X, NUMCELLS_Y, 1);
+    glDispatchCompute((NUMCELLS_X+7)/8, (NUMCELLS_Y+7)/8, 1);
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT); // Wait for execution to complete so data isn't overwritten
 
     // glBindBuffer(GL_SHADER_STORAGE_BUFFER, prevCellsBuf);
@@ -322,15 +325,16 @@ void executeCompShader()
     uint32* ptr = static_cast<uint32*>(glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, newCells.size() * sizeof(uint32), GL_MAP_READ_BIT));
     if (ptr)
     {
-        std::vector<uint32> result(ptr, ptr + prevCells.size());
-        newCells = result;
+        std::copy(ptr, ptr + newCells.size(), newCells.begin());
     }
     glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 
-    // Bind buffers to SSBOS
-    writeToSSBOs();
+    // "New" becomes "Prev"
+    std::swap(prevCellsBuf, newCellsBuf);
 
-    prevCells = newCells;
+    // Tell the shader about the swap
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, prevCellsBuf);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, newCellsBuf);
 }
 
 void writeToSSBOs()
