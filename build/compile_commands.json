@@ -1,31 +1,31 @@
 [
 {
   "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
-  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\main.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\main.cpp\"",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -DSHADER_PATH=\"\\\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\\\"\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\main.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\main.cpp\"",
   "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\main.cpp",
   "output": "CMakeFiles\\gameOLifeGL.dir\\main.cpp.obj"
 },
 {
   "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
-  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -o CMakeFiles\\gameOLifeGL.dir\\src\\glad.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\glad.c\"",
+  "command": "C:\\opamroot\\opam-e4f9fe\\default\\bin\\x86_64-w64-mingw32-gcc.exe -DSHADER_PATH=\"\\\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\\\"\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -o CMakeFiles\\gameOLifeGL.dir\\src\\glad.c.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\glad.c\"",
   "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\glad.c",
   "output": "CMakeFiles\\gameOLifeGL.dir\\src\\glad.c.obj"
 },
 {
   "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
-  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\shader_program.cpp\"",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -DSHADER_PATH=\"\\\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\\\"\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\shader_program.cpp\"",
   "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\shader_program.cpp",
   "output": "CMakeFiles\\gameOLifeGL.dir\\src\\shader_program.cpp.obj"
 },
 {
   "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
-  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\vf_shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\vf_shader_program.cpp\"",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -DSHADER_PATH=\"\\\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\\\"\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\vf_shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\vf_shader_program.cpp\"",
   "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\vf_shader_program.cpp",
   "output": "CMakeFiles\\gameOLifeGL.dir\\src\\vf_shader_program.cpp.obj"
 },
 {
   "directory": "C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build",
-  "command": "C:\\Strawberry\\c\\bin\\c++.exe -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\compute_shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\compute_shader_program.cpp\"",
+  "command": "C:\\Strawberry\\c\\bin\\c++.exe -DSHADER_PATH=\"\\\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\\\"\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include\" -I\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include\" -g -std=gnu++17 -o CMakeFiles\\gameOLifeGL.dir\\src\\compute_shader_program.cpp.obj -c \"C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\compute_shader_program.cpp\"",
   "file": "C:\\Users\\Gabriel AP\\Documents\\repos\\gameOLifeGL\\src\\compute_shader_program.cpp",
   "output": "CMakeFiles\\gameOLifeGL.dir\\src\\compute_shader_program.cpp.obj"
 },

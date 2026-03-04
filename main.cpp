@@ -150,7 +150,7 @@ void renderLiveCells()
 // This shader computes the core logic of the cellular automata (not used for drawing)
 void initCellsComputeShader()
 {
-    computeShader = new ComputeShaderProgram("shaders//computeShader.comp");
+    computeShader = new ComputeShaderProgram(SHADER_PATH "computeShader.comp");
 
     computeShader->use();
     computeShader->setInt_w_Name("numCellsX", NUMCELLS_X);
@@ -190,7 +190,7 @@ void initCellsComputeShader()
 // This shader draws an unchanging base grid with lines
 void initGridShader()
 {
-    grid.Shader = new VFShaderProgram("shaders//vert.vert", "shaders//frag.frag");
+    grid.Shader = new VFShaderProgram(SHADER_PATH "vert.vert", SHADER_PATH "frag.frag");
 
     // Create & bind buffers
     // ---------------------
@@ -229,7 +229,7 @@ void initGridShader()
 // This shader draws coloured squares upon only the live cells
 void initLiveCellsShader()
 {
-    liveCells.Shader = new VFShaderProgram("shaders//vert.vert", "shaders//frag.frag");
+    liveCells.Shader = new VFShaderProgram(SHADER_PATH "vert.vert", SHADER_PATH "frag.frag");
 
     // Create & bind buffers
     // ---------------------

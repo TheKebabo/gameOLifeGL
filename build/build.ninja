@@ -50,6 +50,7 @@ cmake_ninja_workdir = C$:/Users/Gabriel$ AP/Documents/repos/gameOLifeGL/build/
 build cmake_object_order_depends_target_gameOLifeGL: phony || cmake_object_order_depends_target_glfw
 
 build CMakeFiles/gameOLifeGL.dir/main.cpp.obj: CXX_COMPILER__gameOLifeGL_unscanned_Debug C$:/Users/Gabriel$ AP/Documents/repos/gameOLifeGL/main.cpp || cmake_object_order_depends_target_gameOLifeGL
+  DEFINES = -DSHADER_PATH="\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\""
   DEP_FILE = CMakeFiles\gameOLifeGL.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++17
   INCLUDES = -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include" -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include"
@@ -57,6 +58,7 @@ build CMakeFiles/gameOLifeGL.dir/main.cpp.obj: CXX_COMPILER__gameOLifeGL_unscann
   OBJECT_FILE_DIR = CMakeFiles\gameOLifeGL.dir
 
 build CMakeFiles/gameOLifeGL.dir/src/glad.c.obj: C_COMPILER__gameOLifeGL_unscanned_Debug C$:/Users/Gabriel$ AP/Documents/repos/gameOLifeGL/src/glad.c || cmake_object_order_depends_target_gameOLifeGL
+  DEFINES = -DSHADER_PATH="\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\""
   DEP_FILE = CMakeFiles\gameOLifeGL.dir\src\glad.c.obj.d
   FLAGS = -g
   INCLUDES = -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include" -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include"
@@ -64,6 +66,7 @@ build CMakeFiles/gameOLifeGL.dir/src/glad.c.obj: C_COMPILER__gameOLifeGL_unscann
   OBJECT_FILE_DIR = CMakeFiles\gameOLifeGL.dir\src
 
 build CMakeFiles/gameOLifeGL.dir/src/shader_program.cpp.obj: CXX_COMPILER__gameOLifeGL_unscanned_Debug C$:/Users/Gabriel$ AP/Documents/repos/gameOLifeGL/src/shader_program.cpp || cmake_object_order_depends_target_gameOLifeGL
+  DEFINES = -DSHADER_PATH="\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\""
   DEP_FILE = CMakeFiles\gameOLifeGL.dir\src\shader_program.cpp.obj.d
   FLAGS = -g -std=gnu++17
   INCLUDES = -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include" -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include"
@@ -71,6 +74,7 @@ build CMakeFiles/gameOLifeGL.dir/src/shader_program.cpp.obj: CXX_COMPILER__gameO
   OBJECT_FILE_DIR = CMakeFiles\gameOLifeGL.dir\src
 
 build CMakeFiles/gameOLifeGL.dir/src/vf_shader_program.cpp.obj: CXX_COMPILER__gameOLifeGL_unscanned_Debug C$:/Users/Gabriel$ AP/Documents/repos/gameOLifeGL/src/vf_shader_program.cpp || cmake_object_order_depends_target_gameOLifeGL
+  DEFINES = -DSHADER_PATH="\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\""
   DEP_FILE = CMakeFiles\gameOLifeGL.dir\src\vf_shader_program.cpp.obj.d
   FLAGS = -g -std=gnu++17
   INCLUDES = -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include" -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include"
@@ -78,6 +82,7 @@ build CMakeFiles/gameOLifeGL.dir/src/vf_shader_program.cpp.obj: CXX_COMPILER__ga
   OBJECT_FILE_DIR = CMakeFiles\gameOLifeGL.dir\src
 
 build CMakeFiles/gameOLifeGL.dir/src/compute_shader_program.cpp.obj: CXX_COMPILER__gameOLifeGL_unscanned_Debug C$:/Users/Gabriel$ AP/Documents/repos/gameOLifeGL/src/compute_shader_program.cpp || cmake_object_order_depends_target_gameOLifeGL
+  DEFINES = -DSHADER_PATH="\"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/src/shaders/\""
   DEP_FILE = CMakeFiles\gameOLifeGL.dir\src\compute_shader_program.cpp.obj.d
   FLAGS = -g -std=gnu++17
   INCLUDES = -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/include" -I"C:/Users/Gabriel AP/Documents/repos/gameOLifeGL/build/_deps/glfw-src/include"

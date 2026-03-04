@@ -24,11 +24,14 @@ set(SOURCES
     src/shader_program.cpp
     src/vf_shader_program.cpp
     src/compute_shader_program.cpp
-    # Add your other src files here
 )
 
 # --- 3. CREATE EXECUTABLE ---
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE 
+    SHADER_PATH=\"${CMAKE_CURRENT_SOURCE_DIR}/src/shaders/\"
+)
 
 # --- 4. LINK HEADERS AND LIBRARIES ---
 # Tell CMake where your local headers (glad, glm) are
@@ -37,7 +40,3 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 # Link the OpenGL library (built into Windows) and GLFW
 find_package(OpenGL REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw OpenGL::GL)
-
-# This tells CMake to copy the entire shaders folder into your build directory
-file(COPY "${CMAKE_SOURCE_DIR}/src/shaders" 
-     DESTINATION "${CMAKE_BINARY_DIR}")
